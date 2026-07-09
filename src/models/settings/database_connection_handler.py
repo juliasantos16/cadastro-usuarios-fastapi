@@ -25,6 +25,3 @@ class DBConnectionHandler:
 
     async def __aexit__ (self, exc_type, exc_val, exc_tb):
         await self.session.close()
-
-async with DBConnectionHandler() as db:
-    db.session.commit()
