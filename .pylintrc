@@ -6,7 +6,10 @@ disable=
       C0116, #missing-function-docstring
       E0015, #unrecognized-option
       C0209, #consider-using-f-string
-      C0115
+      C0115,
+      W0611, #Unused FastAPI imported from fastapi
+      C0305,
+      C0304
       
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
