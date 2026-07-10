@@ -1,5 +1,5 @@
 from src.models.settings.metadata import metadata
-from sqlalchemy import Table, Column
+from sqlalchemy import Table, Column, Integer, String
 
 users = Table (
     "users",
