@@ -25,8 +25,6 @@ async def test_find_user_by_name():
     assert 'attributes' in response
     assert isinstance (response['attributes'], list)
 
-    # _UserFinder__users_repository
-
 
 
 
