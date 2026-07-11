@@ -15,3 +15,7 @@ schema.db
 .python-version
 
 pytest.ini
+
+init
+
+schema.sql

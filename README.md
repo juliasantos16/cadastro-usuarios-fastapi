@@ -1,6 +1,6 @@
 ### <small>Cadastro de Usuários</small>
 
-<small>API simples para cadastro e busca de usuários.</small>
+<small>API para cadastro e busca de usuários.</small>
 
 #### <small>Tecnologias</small>
 <small>Python, FastAPI, SQLAlchemy, SQLite, Uvicorn, Pytest</small>
