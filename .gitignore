@@ -11,3 +11,7 @@ __pycache__
 .python-version
 
 schema.db
+
+.python-version
+
+pytest.ini
