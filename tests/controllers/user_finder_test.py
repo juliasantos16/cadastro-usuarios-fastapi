@@ -1,5 +1,5 @@
 import pytest
-from .user_finder import UserFinder
+from src.controllers.user_finder import UserFinder
 
 
 class UserRepositoryMock:
@@ -24,7 +24,3 @@ async def test_find_user_by_name():
     assert response ['count'] == 2
     assert 'attributes' in response
     assert isinstance (response['attributes'], list)
-
-
-
-

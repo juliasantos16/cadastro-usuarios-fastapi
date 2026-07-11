@@ -1,4 +1,4 @@
-from .users_repository import UsersRepository
+from src.models.repositories.users_repository import UsersRepository
 import pytest
 
 @pytest.mark.asyncio
@@ -19,4 +19,3 @@ async def test_get_users_by_name():
     repo= UsersRepository()
     response = await repo.get_users_by_name("NomeDeTeste")
     print(response)
-
