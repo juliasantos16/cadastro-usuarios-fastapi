@@ -1,4 +1,5 @@
 from src.controllers.interfaces.user_finder import UserFinderInterface
+from src.errors.error_handler import error_handler
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 
@@ -8,8 +9,11 @@ class UserFinderView:
         self.__controller = controller
 
     async def handle_find_user_by_name(self, http_request: HttpRequest) -> HttpResponse:
-        user_name = http_request.path_params['user_name']
-        response = await self.__controller.find_user_by_name(user_name)
+        try:
+            user_name = http_request.path_params['user_name']
+            response = await self.__controller.find_user_by_name(user_name)
 
-        return HttpResponse(body=response, status_code=200)
+            return HttpResponse(body=response, status_code=200)
+        except Exception as error:
+            error_handler(error)
 

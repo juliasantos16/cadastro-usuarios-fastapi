@@ -34,3 +34,24 @@ async def test_handle_find_user_by_name():
         "count": 1,
         "attributes": [{"user_name": "John Doe"}]
     }
+
+
+@pytest.mark.asyncio
+async def test_handle_find_user_by_name_error():
+    from fastapi import HTTPException
+    from src.errors.types.http_not_found import HttpNotFoundError
+
+    class UserFinderControllerErrorMock:
+        async def find_user_by_name(self, user_name: str) -> dict:
+            raise HttpNotFoundError("Usuário não encontrado")
+
+    controller = UserFinderControllerErrorMock()
+    view = UserFinderView(controller)
+    http_request = HttpRequest(path_params={"user_name": "John Doe"})
+
+    # Act & Assert
+    with pytest.raises(HTTPException) as excinfo:
+        await view.handle_find_user_by_name(http_request)
+
+    assert excinfo.value.status_code == 404
+    assert excinfo.value.detail == "Usuário não encontrado"

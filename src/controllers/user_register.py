@@ -1,4 +1,5 @@
 from src.models.repositories.interfaces.users_repository import UsersRepositoryInterface
+from src.errors.types.http_unprocessable_entity import HttpUnprocessableEntityError
 from .interfaces.user_register import UserRegisterInterface
 
 class UserRegister(UserRegisterInterface):
@@ -14,11 +15,14 @@ class UserRegister(UserRegisterInterface):
         age = user_data["age"]
         uf = user_data["uf"].upper()
 
-        if uf not in ['MG', 'BA', 'CE', 'SC', 'MT']:
-            raise Exception ("Estado inválido para cadastro")
+        if uf not in ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", 
+                    "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", 
+                    "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"]:
 
-        if age < 0 or age > 120:
-            raise Exception ("Idade inválida para cadastro")
+            raise HttpUnprocessableEntityError("Estado inválido para cadastro")
+
+        if age > 120:
+            raise HttpUnprocessableEntityError("Idade inválida para cadastro")
 
     async def __registry_user(self, user_data: dict) -> None:
         await self.__users_repository.insert_users(user_data)

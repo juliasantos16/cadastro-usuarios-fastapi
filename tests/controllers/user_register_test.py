@@ -1,4 +1,5 @@
 from src.controllers.user_register import UserRegister
+from src.errors.types.http_unprocessable_entity import HttpUnprocessableEntityError
 import pytest
 
 class UserRepositoryMock:
@@ -42,11 +43,13 @@ async def test_register_user_error_uf():
     invalid_uf_user_data = {
         'user_name': 'Maria Silva',
         'age': 32,
-        'uf': 'ES'
+        'uf': 'XX'
     }
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(HttpUnprocessableEntityError) as excinfo:
         await user_register.register_user(invalid_uf_user_data)
     assert str(excinfo.value) == "Estado inválido para cadastro"
+    assert excinfo.value.status_code == 422
+    assert excinfo.value.name == "UnprocessableEntity"
     assert user_repository.insert_users_att == {}
 
 
@@ -61,7 +64,9 @@ async def test_register_user_error_age():
         'age': -32,
         'uf': 'MG'
     }
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(HttpUnprocessableEntityError) as excinfo:
         await user_register.register_user(invalid_age_user_data)
     assert str(excinfo.value) == "Idade inválida para cadastro"
+    assert excinfo.value.status_code == 422
+    assert excinfo.value.name == "UnprocessableEntity"
     assert user_repository.insert_users_att == {}
