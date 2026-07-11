@@ -1,21 +1,19 @@
-.venv
+# Ambientes virtuais
+.venv/
+venv/
 
-venv
 
-.vscode
+.vscode/
 
-__pycache__
-
-.pytest_cache
-
-.python-version
+__pycache__/
+.pytest_cache/
 
 schema.db
 
 .python-version
 
+*.pyc
+
 pytest.ini
-
-init
-
-schema.sql
+schema.db
+init/
